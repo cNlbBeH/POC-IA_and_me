@@ -31,7 +31,11 @@ export class ParticipantsComponent {
     this.participantsService.delete(p.id);
   }
 
-  addNewParticipant() {
+  onDisplayNewParticipantForm(){
+    // Code ici pour afficher le formulaire dans la modale
+  }
+
+  onCreate() {
     this.participantsService.create({
       firstName: 'Ada', lastName: 'Lovelace',
       email: 'ada@example.com', phone: '+32470...',
