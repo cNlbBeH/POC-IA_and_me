@@ -1,13 +1,42 @@
-.table {
-  width: 100%;
-  border-collapse: collapse;
+.participants-list {
+  max-width: 800px;
+  margin: 2rem auto;
 }
-.table th,
-.table td {
-  border-bottom: 1px solid #ddd;
-  padding: 0.5rem;
-  text-align: left;
+
+.participants-header {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #555;
 }
-.table th {
-  cursor: pointer;
+
+.ons-empty {
+  text-align: center;
+  font-style: italic;
+  color: #999;
+  margin-top: 2rem;
+}
+
+.participant-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.participant-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.participant-info p {
+  margin: 0.2rem 0;
+  font-size: 0.95rem;
+}
+
+.participant-actions button {
+  margin-left: 0.5rem;
 }

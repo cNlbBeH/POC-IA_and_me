@@ -1,12 +1,89 @@
-<form [formGroup]="form" class="grid" (submit)="searchParticipant()">
-  <label>Nom <input type="text" formControlName="lastName" /></label>
-  <label>Prénom <input type="text" formControlName="firstName" /></label>
-  <label>Ville <input type="text" formControlName="city" /></label>
-  <label>Email <input type="email" formControlName="email" /></label>
-  <label>Téléphone <input type="text" formControlName="phone" /></label>
+<form [formGroup]="form" (ngSubmit)="searchParticipant()" class="ons-form">
+  <div class="ons-form-group">
+    <label for="lastName">Nom</label>
+    <input
+      id="lastName"
+      formControlName="lastName"
+      class="ons-input"
+      placeholder="Nom"
+    />
+    <div
+      class="ons-error"
+      *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched"
+    >
+      Le nom ne doit pas dépasser 50 caractères.
+    </div>
+  </div>
 
-  <div class="actions">
-    <button type="button" (click)="reset()">Réinitialiser</button>
-    <button type="submit">Rechercher</button>
+  <div class="ons-form-group">
+    <label for="firstName">Prénom</label>
+    <input
+      id="firstName"
+      formControlName="firstName"
+      class="ons-input"
+      placeholder="Prénom"
+    />
+    <div
+      class="ons-error"
+      *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched"
+    >
+      Le prénom ne doit pas dépasser 50 caractères.
+    </div>
+  </div>
+
+  <div class="ons-form-group">
+    <label for="city">Ville</label>
+    <input
+      id="city"
+      formControlName="city"
+      class="ons-input"
+      placeholder="Ville"
+    />
+    <div
+      class="ons-error"
+      *ngIf="form.get('city')?.invalid && form.get('city')?.touched"
+    >
+      La ville ne doit pas dépasser 50 caractères.
+    </div>
+  </div>
+
+  <div class="ons-form-group">
+    <label for="email">Email</label>
+    <input
+      id="email"
+      formControlName="email"
+      class="ons-input"
+      type="email"
+      placeholder="Email"
+    />
+    <div
+      class="ons-error"
+      *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+    >
+      Adresse email invalide.
+    </div>
+  </div>
+
+  <div class="ons-form-group">
+    <label for="phone">Téléphone</label>
+    <input
+      id="phone"
+      formControlName="phone"
+      class="ons-input"
+      placeholder="Téléphone"
+    />
+    <div
+      class="ons-error"
+      *ngIf="form.get('phone')?.invalid && form.get('phone')?.touched"
+    >
+      Numéro invalide (10 chiffres requis).
+    </div>
+  </div>
+
+  <div class="ons-form-actions">
+    <button type="button" class="ons-button--quiet" (click)="reset()">
+      Réinitialiser
+    </button>
+    <button type="submit" class="ons-button--cta">Rechercher</button>
   </div>
 </form>

@@ -1,29 +1,24 @@
-@if(participants()){
-<table class="table">
-  <thead>
-    <tr>
-      <th (click)="sort('lastName')">Nom</th>
-      <th (click)="sort('firstName')">Prénom</th>
-      <th (click)="sort('city')">Ville</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for(p of participants(); track p.id){
-    <tr>
-      <td>{{ p.lastName }}</td>
-      <td>{{ p.firstName }}</td>
-      <td>{{ p.address?.city }}</td>
-      <td>
-        <button (click)="update.emit(p)">Modifier</button>
-        <button (click)="remove.emit(p)">Supprimer</button>
-      </td>
-    </tr>
-    }
-  </tbody>
-</table>
-}@else {
-<ng-template #empty>
-  <p>Aucun participant.</p>
-</ng-template>
-}
+<div class="participants-list">
+  @for( p of participants(); track p.id){
+  <div class="ons-card participant-card">
+    <div class="participant-info">
+      <h3>{{ p.firstName }} {{ p.lastName }}</h3>
+      <p><strong>Ville :</strong> {{ p.address?.city || "Non renseignée" }}</p>
+      <p><strong>Email :</strong> {{ p.email || "Non renseigné" }}</p>
+      <p><strong>Téléphone :</strong> {{ p.phone || "Non renseigné" }}</p>
+    </div>
+    <div class="participant-actions">
+      <div class="participant-actions">
+        <button class="ons-button ons-button--edit" (click)="edit(p.id)">
+          ✏️ Modifier
+        </button>
+        <button class="ons-button ons-button--delete" (click)="delete(p.id)">
+          🗑️ Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+  }@empty {
+  <div class="ons-empty">Aucun participant trouvé.</div>
+  }
+</div>

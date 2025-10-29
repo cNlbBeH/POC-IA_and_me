@@ -31,7 +31,7 @@ export class ParticipantsComponent {
     this.participantsService.delete(p.id);
   }
 
-  addDemo() {
+  addNewParticipant() {
     this.participantsService.create({
       firstName: 'Ada', lastName: 'Lovelace',
       email: 'ada@example.com', phone: '+32470...',

@@ -1,6 +1,8 @@
 <section class="head">
   <h2>Participants</h2>
-  <button class="add" (click)="addDemo()">Ajouter (démo)</button>
+  <button class="ons-button ons-button--delete" (click)="addNewParticipant()">
+    Ajouter
+  </button>
 </section>
 
 <app-participants-search (search)="onSearchParticipant($event)" />

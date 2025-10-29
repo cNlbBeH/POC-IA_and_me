@@ -5,3 +5,33 @@ html,body{height:100%;margin:0;font-family:Segoe UI, Roboto, Arial, sans-serif}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.ons-button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.ons-button--edit {
+  background-color: #f0f8ff;
+  color: #007aff;
+  border: 1px solid #007aff;
+}
+
+.ons-button--edit:hover {
+  background-color: #e0f0ff;
+}
+
+.ons-button--delete {
+  background-color: #ffecec;
+  color: #d9534f;
+  border: 1px solid #d9534f;
+  margin-left: 0.5rem;
+}
+
+.ons-button--delete:hover {
+  background-color: #ffd6d6;
+}

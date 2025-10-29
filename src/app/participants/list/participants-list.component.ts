@@ -33,4 +33,12 @@ export class ParticipantsListComponent {
     }
     this.sortChange.emit({ active: this.lastActive, direction: this.lastDir });
   }
+
+  edit(participantId: string){
+    console.log("Edit:", participantId);
+  }
+
+  delete(participantId: string){
+    console.log("Delete:", participantId);
+  }
 }
