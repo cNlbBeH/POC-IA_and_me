@@ -11,3 +11,11 @@ export interface Participant {
   email?: string;
   preferredCommunication?: PreferredCommunication;
 }
+
+export interface ParticipantSearch{
+      lastName: string,
+      firstName: string,
+      city: string,
+      email: string,
+      phone: string
+}

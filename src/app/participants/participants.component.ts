@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { ParticipantsSearchComponent } from './search/participants-search.component';
 import { ParticipantsListComponent } from './list/participants-list.component';
-import { ParticipantsStore } from './participants.service';
+import { ParticipantsService } from './participants.service';
+import { ParticipantSearch } from '../shared/models/participant.model';
 
 @Component({
   standalone: true,
@@ -11,26 +12,27 @@ import { ParticipantsStore } from './participants.service';
   styleUrls: ['./participants.component.css']
 })
 export class ParticipantsComponent {
-  store = inject(ParticipantsStore);
+  participantsService = inject(ParticipantsService);
 
-  onSearch(criteria: any) {
-    this.store.patchCriteria(criteria);
+  onSearchParticipant(form: ParticipantSearch) {
+    this.participantsService.loadParticipants(form);
+    //this.participantsService.patchCriteria(form);
   }
 
   onSort({ active, direction }: { active: 'lastName'|'firstName'|'city'; direction: 'asc'|'desc' }) {
-    this.store.patchCriteria({ sort: active, order: direction });
+    this.participantsService.patchCriteria({ sort: active, order: direction });
   }
 
   onUpdate(p: any) {
-    this.store.update(p.id, { ...p, lastName: p.lastName + ' (modifié)' });
+    this.participantsService.update(p.id, { ...p, lastName: p.lastName + ' (modifié)' });
   }
 
   onRemove(p: any) {
-    this.store.delete(p.id);
+    this.participantsService.delete(p.id);
   }
 
   addDemo() {
-    this.store.create({
+    this.participantsService.create({
       firstName: 'Ada', lastName: 'Lovelace',
       email: 'ada@example.com', phone: '+32470...',
       address: { street: 'Rue Démo', number: '1', postalCode: '4000', city: 'Liège' }
