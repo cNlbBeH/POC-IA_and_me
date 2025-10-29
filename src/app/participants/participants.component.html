@@ -1,0 +1,14 @@
+<section class="head">
+  <h2>Participants</h2>
+  <button class="add" (click)="addDemo()">Ajouter (démo)</button>
+</section>
+
+<app-participants-search (search)="onSearch($event)"></app-participants-search>
+
+<app-participants-list
+  [data]="store.filtered()"
+  [loading]="store.loading()"
+  (sortChange)="onSort($event)"
+  (update)="onUpdate($event)"
+  (remove)="onRemove($event)">
+</app-participants-list>

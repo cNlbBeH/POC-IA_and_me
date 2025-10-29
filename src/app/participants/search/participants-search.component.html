@@ -1,0 +1,12 @@
+<form class="grid" (submit)="emit()">
+  <label>Nom <input type="text" [(ngModel)]="lastName"  name="lastName"></label>
+  <label>Prénom <input type="text" [(ngModel)]="firstName" name="firstName"></label>
+  <label>Ville <input type="text" [(ngModel)]="city"      name="city"></label>
+  <label>Email <input type="email" [(ngModel)]="email"    name="email"></label>
+  <label>Téléphone <input type="text" [(ngModel)]="phone" name="phone"></label>
+  <div class="actions">
+    <button type="button" (click)="reset()">Réinitialiser</button>
+    <button type="submit">Rechercher</button>
+  </div>
+</form>
+``

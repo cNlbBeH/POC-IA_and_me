@@ -1,0 +1,29 @@
+@if(participants()){
+<table class="table">
+  <thead>
+    <tr>
+      <th (click)="sort('lastName')">Nom</th>
+      <th (click)="sort('firstName')">Prénom</th>
+      <th (click)="sort('city')">Ville</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(p of participants(); track p.lastName){
+    <tr>
+      <td>{{ p.lastName }}</td>
+      <td>{{ p.firstName }}</td>
+      <td>{{ p.address?.city }}</td>
+      <td>
+        <button (click)="update.emit(p)">Modifier</button>
+        <button (click)="remove.emit(p)">Supprimer</button>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+}@else {
+<ng-template #empty>
+  <p>Aucun participant.</p>
+</ng-template>
+}
