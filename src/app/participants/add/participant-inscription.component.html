@@ -1,64 +1,174 @@
-<div class="participant-inscription-container">
-  <h2>Inscription d'un participant</h2>
+<div class="modal-backdrop" (click)="close()">
+  <!-- stop propagation pour ne pas fermer si on clique dans la boîte -->
+  <div class="modal" (click)="$event.stopPropagation()">
+    <header class="modal-header">
+      <h2>Inscription d'un participant</h2>
+      <button class="close-btn" type="button" (click)="close()">×</button>
+    </header>
 
-  <form [formGroup]="form" (ngSubmit)="onSave()">
-    <div class="form-row">
-      <label>Prénom</label>
-      <input formControlName="firstName" type="text" />
+    <!-- Corps scrollable -->
+    <div class="modal-body">
+      <form [formGroup]="form" (ngSubmit)="onSave()">
+        <div class="form-row">
+          <label for="firstName">Prénom</label>
+          <input id="firstName" formControlName="firstName" type="text" />
+          @if (form.controls['firstName'].touched &&
+          form.controls['firstName'].invalid) {
+          <small class="error">Le prénom est requis.</small>
+          }
+        </div>
+
+        <div class="form-row">
+          <label for="lastName">Nom</label>
+          <input id="lastName" formControlName="lastName" type="text" />
+          @if (form.controls['lastName'].touched &&
+          form.controls['lastName'].invalid) {
+          <small class="error">Le nom est requis.</small>
+          }
+        </div>
+
+        <div class="form-row">
+          <label for="birthDate">Date de naissance</label>
+          <input id="birthDate" formControlName="birthDate" type="date" />
+        </div>
+
+        <div class="form-row">
+          <label for="phone">Téléphone</label>
+          <input
+            id="phone"
+            formControlName="phone"
+            type="tel"
+            inputmode="tel"
+          />
+        </div>
+
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            formControlName="email"
+            type="email"
+            inputmode="email"
+          />
+          @if (form.controls['email'].touched && form.controls['email'].invalid)
+          {
+          <small class="error">Email invalide.</small>
+          }
+        </div>
+
+        <!-- Communication préférée -->
+        <fieldset class="form-row">
+          <legend>Communication préférée</legend>
+          <label>
+            <input
+              type="radio"
+              formControlName="preferredCommunication"
+              value="sms"
+            />
+            SMS
+          </label>
+          <label>
+            <input
+              type="radio"
+              formControlName="preferredCommunication"
+              value="email"
+            />
+            Email
+          </label>
+          <label>
+            <input
+              type="radio"
+              formControlName="preferredCommunication"
+              value="postal"
+            />
+            Postal
+          </label>
+        </fieldset>
+
+        <!-- Adresse -->
+        <div formGroupName="address" class="address-group">
+          <h3>Adresse</h3>
+
+          <div class="form-row">
+            <label for="street">Rue</label>
+            <input id="street" formControlName="street" type="text" />
+            @if (c['street'].touched && c['street'].invalid) {
+            <div class="error">
+              @if (c['street'].errors?.['required']) {
+              <span>La rue est requise.</span> } @if
+              (c['street'].errors?.['minlength']) {
+              <span>Au moins 2 caractères.</span> }
+            </div>
+            }
+          </div>
+
+          <div class="form-row">
+            <label for="number">Numéro</label>
+            <input id="number" formControlName="number" type="text" />
+            @if (c['number'].touched && c['number'].invalid) {
+            <div class="error">
+              @if (c['number'].errors?.['required']) {
+              <span>Le numéro est requis.</span> } @if
+              (c['number'].errors?.['pattern']) {
+              <span>Format invalide (ex. 12, 12A, 12/3, 12-b).</span> }
+            </div>
+            }
+          </div>
+
+          <div class="form-row">
+            <label for="postalCode">Code postal</label>
+            <input
+              id="postalCode"
+              formControlName="postalCode"
+              type="text"
+              inputmode="numeric"
+            />
+            @if (c['postalCode'].touched && c['postalCode'].invalid) {
+            <div class="error">
+              @if (c['postalCode'].errors?.['required']) {
+              <span>Le code postal est requis.</span> } @if
+              (c['postalCode'].errors?.['postalFormat']) {
+              <span>4 chiffres attendus.</span> } @if
+              (c['postalCode'].errors?.['postalRange']) {
+              <span>Doit être entre 1000 et 9999.</span> }
+            </div>
+            }
+          </div>
+
+          <div class="form-row">
+            <label for="city">Localité</label>
+            <input id="city" formControlName="city" type="text" />
+            @if (c['city'].touched && c['city'].invalid) {
+            <div class="error">
+              @if (c['city'].errors?.['required']) {
+              <span>La localité est requise.</span> } @if
+              (c['city'].errors?.['minlength']) {
+              <span>Au moins 2 caractères.</span> }
+            </div>
+            }
+          </div>
+        </div>
+      </form>
     </div>
 
-    <div class="form-row">
-      <label>Nom</label>
-      <input formControlName="lastName" type="text" />
-    </div>
+    <footer class="modal-footer">
+      <!-- Ferme l’outlet nommé 'modal' -->
+      <button
+        class="ons-button ons-button--quiet"
+        type="button"
+        (click)="close()"
+      >
+        Annuler
+      </button>
 
-    <div class="form-row">
-      <label>Date de naissance</label>
-      <input formControlName="birthDate" type="date" />
-    </div>
-
-    <div class="form-row">
-      <label>Téléphone</label>
-      <input formControlName="phone" type="tel" />
-    </div>
-
-    <div class="form-row">
-      <label>Email</label>
-      <input formControlName="email" type="email" />
-    </div>
-
-    <div formGroupName="address" class="address-group">
-      <h3>Adresse</h3>
-      <div class="form-row">
-        <label>Rue</label>
-        <input formControlName="street" type="text" />
-      </div>
-      <div class="form-row">
-        <label>Numéro</label>
-        <input formControlName="number" type="text" />
-      </div>
-      <div class="form-row">
-        <label>Code postal</label>
-        <input formControlName="postalCode" type="text" />
-      </div>
-      <div class="form-row">
-        <label>Ville</label>
-        <input formControlName="city" type="text" />
-      </div>
-    </div>
-
-    <div class="form-row">
-      <label>Communication préférée</label>
-      <select formControlName="preferredCommunication">
-        <option value="email">Email</option>
-        <option value="sms">SMS</option>
-        <option value="postal">Postal</option>
-      </select>
-    </div>
-
-    <div class="buttons">
-      <button type="button" class="btn-cancel" (click)="onCancel()">Cancel</button>
-      <button type="submit" class="btn-save">Save</button>
-    </div>
-  </form>
+      <button
+        class="ons-button ons-button--cta"
+        type="submit"
+        form="ngFormSubmitProxy"
+        (click)="onSave()"
+      >
+        Sauver
+      </button>
+    </footer>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, output } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ParticipantsService } from '../participants.service';
 
 @Component({
   standalone: true,
@@ -15,6 +16,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./participants-search.component.css'],
 })
 export class ParticipantsSearchComponent {
+  private participantsService = inject(ParticipantsService);
+
   form = new FormGroup({
     lastName: new FormControl('', [Validators.maxLength(50)]),
     firstName: new FormControl('', [Validators.maxLength(50)]),
@@ -23,25 +26,17 @@ export class ParticipantsSearchComponent {
     phone: new FormControl('', [Validators.pattern(/^\d{10}$/)]),
   });
 
-  search = output<any>();
-
   searchParticipant() {
-    this.form.markAllAsTouched();
-    if (this.form.valid) {
-      this.search.emit(this.form.value);
-    }
-
-    this.search.emit({
-      lastName: this.form.controls.lastName.value,
-      firstName: this.form.controls.firstName.value,
-      city: this.form.controls.city.value,
-      email: this.form.controls.email.value,
-      phone: this.form.controls.phone.value,
+    this.participantsService.loadParticipants({
+      lastName: this.form.controls.lastName.value ?? '',
+      firstName: this.form.controls.firstName.value ?? '',
+      city: this.form.controls.city.value ?? '',
+      email: this.form.controls.email.value ?? '',
+      phone: this.form.controls.phone.value ?? '',
     });
   }
 
   reset() {
     this.form.reset();
-    this.searchParticipant();
   }
 }

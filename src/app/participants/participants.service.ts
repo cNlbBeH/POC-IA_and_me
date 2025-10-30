@@ -18,12 +18,10 @@ interface Criteria {
 @Injectable({ providedIn: 'root' })
 export class ParticipantsService {
   private _items = signal<Participant[]>([]);
-
   private _criteria = signal<Criteria>({ sort: 'lastName', order: 'asc' });
-  private _loading = signal(false);
 
   /** lecture seule */
-  readonly loading = this._loading.asReadonly();
+  readonly participants = this._items.asReadonly();
 
   /** liste filtrée/triée (dérivation pure) */
   readonly filtered = computed(() => {
