@@ -1,9 +1,15 @@
 <section class="head">
   <h2>Participants</h2>
-  <button class="ons-button ons-button--delete" (click)="onDisplayNewParticipantForm()">
+  <button
+    class="ons-button ons-button--delete"
+    mat-raised-button
+    color="primary"
+    (click)="onDisplayNewParticipantForm()"
+  >
     Ajouter
   </button>
 </section>
 
 <app-participants-search (search)="onSearchParticipant($event)" />
 <app-participants-list />
+@if(showNewParticipantForm){<app-participant-inscription />}

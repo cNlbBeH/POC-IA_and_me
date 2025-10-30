@@ -1,1 +1,64 @@
-<p>participant-inscription works!</p>
+<div class="participant-inscription-container">
+  <h2>Inscription d'un participant</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSave()">
+    <div class="form-row">
+      <label>Prénom</label>
+      <input formControlName="firstName" type="text" />
+    </div>
+
+    <div class="form-row">
+      <label>Nom</label>
+      <input formControlName="lastName" type="text" />
+    </div>
+
+    <div class="form-row">
+      <label>Date de naissance</label>
+      <input formControlName="birthDate" type="date" />
+    </div>
+
+    <div class="form-row">
+      <label>Téléphone</label>
+      <input formControlName="phone" type="tel" />
+    </div>
+
+    <div class="form-row">
+      <label>Email</label>
+      <input formControlName="email" type="email" />
+    </div>
+
+    <div formGroupName="address" class="address-group">
+      <h3>Adresse</h3>
+      <div class="form-row">
+        <label>Rue</label>
+        <input formControlName="street" type="text" />
+      </div>
+      <div class="form-row">
+        <label>Numéro</label>
+        <input formControlName="number" type="text" />
+      </div>
+      <div class="form-row">
+        <label>Code postal</label>
+        <input formControlName="postalCode" type="text" />
+      </div>
+      <div class="form-row">
+        <label>Ville</label>
+        <input formControlName="city" type="text" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label>Communication préférée</label>
+      <select formControlName="preferredCommunication">
+        <option value="email">Email</option>
+        <option value="sms">SMS</option>
+        <option value="postal">Postal</option>
+      </select>
+    </div>
+
+    <div class="buttons">
+      <button type="button" class="btn-cancel" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="btn-save">Save</button>
+    </div>
+  </form>
+</div>
